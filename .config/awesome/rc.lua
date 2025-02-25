@@ -45,7 +45,8 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init("~/.config/awesome/themes/default/theme.lua")
+beautiful.init(gears.filesystem.get_themes_dir() .. "xresources/theme.lua")
+
 -- This is used later as the default terminal and editor to run.
 terminal = "alacritty"
 editor = os.getenv("EDITOR") or "nano"
@@ -70,7 +71,7 @@ awful.layout.layouts = {
 --    awful.layout.suit.spiral,
 --    awful.layout.suit.spiral.dwindle,
     awful.layout.suit.max,
-    awful.layout.suit.max.fullscreen,
+--    awful.layout.suit.max.fullscreen,
 --    awful.layout.suit.magnifier,
 --    awful.layout.suit.corner.nw,
     -- awful.layout.suit.corner.ne,
@@ -156,8 +157,7 @@ local function set_wallpaper(s)
         if type(wallpaper) == "function" then
             wallpaper = wallpaper(s)
         end
-        --gears.wallpaper.maximized(wallpaper, s, true)
-        gears.wallpaper.maximized(wallpaper)
+        gears.wallpaper.maximized(wallpaper, s, true)
     end
 end
 
@@ -562,3 +562,5 @@ end)
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
+awful.spawn.with_shell("~/.config/awesome/autorun.sh")
+
